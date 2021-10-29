@@ -13,6 +13,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using UserApi.Data;
+using UserApi.Helpers;
+using UserApi.Services;
+using UserApi.Services.IServices;
 
 namespace UserApi
 {
@@ -32,6 +35,11 @@ namespace UserApi
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserApi", Version = "v1" }); });
             services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            //appsetting 
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
