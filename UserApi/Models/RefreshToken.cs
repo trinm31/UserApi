@@ -16,7 +16,7 @@ namespace UserApi.Models
         public string CreateById { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Revoked { get; set; }
-        public string RevokedById { get; set; }
+        public string RevokedByIp { get; set; }
         public string ReplaceByToken { get; set; }
         public bool IsActive => Revoked == null && !IsExpired;
     }
